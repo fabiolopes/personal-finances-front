@@ -1,0 +1,36 @@
+.flex-container {
+  display: flex;
+  /*align-items:  center;*/
+  justify-content: center;
+  height: 100vh;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%; /* 50% do espaço para o formulário */
+  padding: 20px; /* Espaçamento interno */
+}
+  
+  .flex-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+
+  .flex-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .table-container {
+    flex-grow: 1; /* Ajuste para a tabela ocupar o espaço restante */
+    padding: 20px;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 2%;
+  }
