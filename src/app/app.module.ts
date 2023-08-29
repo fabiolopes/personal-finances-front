@@ -4,17 +4,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { NewPurchaseComponent } from './new-purchase/new-purchase.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HomeComponent } from './home/home.component';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { StoreService } from './services/store.service';
 import { ApiConstants } from 'src/assets/constants/api.constants';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { LoadComponent } from './common/load/load.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 
 
@@ -22,7 +26,8 @@ import {MatTableModule} from '@angular/material/table';
   declarations: [
     AppComponent,
     NewPurchaseComponent,
-    HomeComponent
+    HomeComponent,
+    LoadComponent
   ],
   imports: [
     BrowserModule,
@@ -34,11 +39,14 @@ import {MatTableModule} from '@angular/material/table';
     CurrencyMaskModule,
     HttpClientModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     StoreService,
-    ApiConstants
+    ApiConstants,
+    LoadComponent
   ],
   bootstrap: [AppComponent]
 })
