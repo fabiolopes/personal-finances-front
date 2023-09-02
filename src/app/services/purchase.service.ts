@@ -12,8 +12,6 @@ export class PurchaseService {
   constructor(private httpClient: HttpClient, private apiConst: ApiConstants) { }
 
   public newPurchase(purchase: Purchase){
-    this.httpClient.post<string>(this.apiConst.ENDPOINT_PURCHASE, purchase).subscribe(success => {
-      console.log('dd')
-    })
+    return this.httpClient.post<string>(this.apiConst.ENDPOINT_PURCHASE, purchase)
   }
 }

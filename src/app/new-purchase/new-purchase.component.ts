@@ -8,7 +8,10 @@ import {MatTableDataSource} from "@angular/material/table";
 import { Item } from '../model/item';
 import {CurrencyPipe} from '@angular/common';
 import { LoadComponent } from '../common/load/load.component';
-
+import { SnackBarComponent } from '../common/snack-bar/snack-bar.component';
+import { Store } from '../model/store';
+import { PaymentMethod } from '../model/payment-method';
+import { Product } from '../model/product';
 
 
 @Component({
@@ -26,7 +29,8 @@ export class NewPurchaseComponent implements OnInit{
     private paymentMethodService: PaymentMethodService,
     private productService: ProductService,
     private purchaseService: PurchaseService,
-    private loadComponent: LoadComponent) {
+    private loadComponent: LoadComponent,
+    private snackBarComponent: SnackBarComponent) {
     this.initObjects()
 
   }
@@ -38,7 +42,7 @@ export class NewPurchaseComponent implements OnInit{
 
   private initPurchase(){
     this.purchase = {
-      store:{id: 0, name: ""}, item:[], paymentMethod:{id: 0, method: ""}
+      store:{id: 0, name: ""}, item:[], paymentMethod:{id: 0, method: "",}, total:0
     }
   }
 
@@ -49,7 +53,7 @@ export class NewPurchaseComponent implements OnInit{
   }
 
   public onChangeStore(newValue: any) {
-    this.storeService.getStoreByName(newValue).subscribe(response => {
+    this.storeService.getStoreByName(newValue).subscribe((response: Store) => {
       if(response != null) {
         this.purchase.store = response
       }
@@ -57,7 +61,7 @@ export class NewPurchaseComponent implements OnInit{
   } 
 
   public onChangePaymentMethod(newValue: any) {
-    this.paymentMethodService.getPaymentMethodByMethodName(newValue).subscribe(response => {
+    this.paymentMethodService.getPaymentMethodByMethodName(newValue).subscribe((response) => {
       if(response != null) {
         this.purchase.paymentMethod = response
       }
@@ -65,25 +69,31 @@ export class NewPurchaseComponent implements OnInit{
   } 
 
   public onChangeProduct(newValue: any) {
-    this.productService.getProductByName(newValue).subscribe(response => {
+    this.productService.getProductByName(newValue).subscribe((response: Product) => {
       if(response != null) {
-        this.purchase.product = response
+        this.item.product = response
       }
     });
   } 
 
   public newItem() {
-    this.loadComponent.openDialog()
     const data = this.dataSource.data
     data.push(this.item)
+    this.purchase.total += this.item.valuePaid
     this.dataSource.data = data
-    this.initItem() 
-    this.loadComponent.closeDialog()
+    this.initItem()
   }
 
   public newPurchase() {
+    this.loadComponent.openDialog()
     this.purchase['items'] = this.dataSource.data
-    this.purchaseService.newPurchase(this.purchase);
+    this.purchaseService.newPurchase(this.purchase).subscribe(success => {
+      console.log(success)
+      this.loadComponent.closeDialog()
+      this.dataSource.data = []
+      this.initObjects()
+      this.snackBarComponent.openSnackBar("Item registrado com sucesso")
+    })
   }
 
   public isItemIncomplete(): boolean{

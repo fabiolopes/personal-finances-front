@@ -45,6 +45,7 @@
         </div>
         <span *ngIf="purchase.store.name != ''">Loja: {{purchase.store.name}}</span>
         <span *ngIf="purchase.paymentMethod.method != ''">Método de pagamento: {{purchase.paymentMethod.method}}</span>
+        <span *ngIf="purchase.total != 0">Total: {{purchase.total | currency}}</span>
     </div>
     <div class="table-container">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -79,7 +80,7 @@
             <!-- Symbol Column -->
             <ng-container matColumnDef="valuePaid">
                 <th mat-header-cell *matHeaderCellDef> Valor pago </th>
-                <td mat-cell *matCellDef="let element"> {{element.valuePaid}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.valuePaid | currency}} </td>
             </ng-container>
         
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
