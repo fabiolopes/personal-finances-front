@@ -1,0 +1,34 @@
+.table-container {
+  height: 500px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-row {
+    height: 40px;
+}
+
+.nodata-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Isso centralizará verticalmente o botão na tela */
+
+  /* Adaptação para dispositivos móveis */
+  @media (max-width: 768px) {
+    height: auto; /* Restaurar altura automática para dispositivos móveis */
+  }
+}
+
+.nodata-wrapper {
+  max-width: 400px; /* Define a largura máxima do contêiner do botão */
+
+  /* Adaptação para dispositivos móveis */
+  @media (max-width: 768px) {
+    padding: 20px; /* Adicionar espaçamento interno para dispositivos móveis */
+    width: 100%; /* Define a largura máxima como 100% para dispositivos móveis */
+  }
+}

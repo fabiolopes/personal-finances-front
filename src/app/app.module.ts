@@ -22,7 +22,17 @@ import { registerLocaleData } from '@angular/common';
 import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackBarComponent } from './common/snack-bar/snack-bar.component';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { RouterModule, Routes }   from '@angular/router';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { PurchaseListComponent } from './purchase-list/purchase-list.component'
+import { PurchaseListService } from './services/purchase-list.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "right",
@@ -43,7 +53,8 @@ registerLocaleData(ptBr);
     NewPurchaseComponent,
     HomeComponent,
     LoadComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    PurchaseListComponent
   ],
   imports: [
     BrowserModule,
@@ -59,10 +70,20 @@ registerLocaleData(ptBr);
     MatDialogModule,
     MatProgressSpinnerModule,
     CurrencyMaskModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    RouterModule,
+    MatTooltipModule,
+    MatPaginatorModule
   ],
   providers: [
     StoreService,
+    PurchaseListService,
     ApiConstants,
     LoadComponent,
     SnackBarComponent,

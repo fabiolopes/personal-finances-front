@@ -3,35 +3,39 @@
     <div class="form-container">
         <div class="flex-row">
             <mat-form-field>
+                <mat-label>Categoria</mat-label>
+                <input matInput type="text" [(ngModel)]="item.category" (ngModelChange)="onChangeCategory($event)" />
+            </mat-form-field>
+            <mat-form-field>
                 <mat-label>Loja</mat-label>
                 <input matInput type="text" [(ngModel)]="purchase.store.name" (ngModelChange)="onChangeStore($event)" />
             </mat-form-field>
+        </div>
+        <div class="flex-row">
             <mat-form-field>
                 <mat-label>Método de Pagamento</mat-label>
                 <input matInput type="text" [(ngModel)]="purchase.paymentMethod.method" (ngModelChange)="onChangePaymentMethod($event)"/>
             </mat-form-field>
-        </div>
-        <div class="flex-row">
             <mat-form-field>
                 <mat-label>Nome do Produto</mat-label>
                 <input matInput type="text" [(ngModel)]="item.product.name" (ngModelChange)="onChangeProduct($event)" />
             </mat-form-field>
+        </div>
+        <div class="flex-row">
             <mat-form-field>
                 <mat-label>Preço</mat-label>
                 <input matInput currencyMask [(ngModel)]="item.price" />
             </mat-form-field>
-        </div>
-        <div class="flex-row">
             <mat-form-field>
                 <mat-label>Unidade</mat-label>
                 <input matInput type="text" [(ngModel)]="item.product.unit" />
             </mat-form-field>
-            <mat-form-field>
-                <mat-label>Quantidade</mat-label>
-                <input matInput type="text" [(ngModel)]="item.qtd" />
-            </mat-form-field>
         </div>
         <div class="flex-row">
+            <mat-form-field>
+                <mat-label>Quantidade</mat-label>
+                <input matInput type="number" [(ngModel)]="item.qtd" />
+            </mat-form-field>
             <mat-form-field>
                 <mat-label>Valor Pago</mat-label>
                 <input matInput currencyMask [(ngModel)]="item.valuePaid" />

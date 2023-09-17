@@ -11,4 +11,7 @@ export class ApiConstants {
     public ENDPOINT_PRODUCT = this.HOST + "/product/"
     public ENDPOINT_PRODUCT_BY_NAME = this.ENDPOINT_PRODUCT + "findByName/"
     public ENDPOINT_PURCHASE = this.HOST + "/purchase"
+    public ENDPOINT_CATEGORY = this.HOST + "/category"
+    public ENDPOINT_CATEGORY_BY_NAME = this.ENDPOINT_CATEGORY + "/findByName/"
+
 }

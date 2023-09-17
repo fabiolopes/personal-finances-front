@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Purchase } from '../model/purchase';
 import { StoreService } from '../services/store.service';
 import { PaymentMethodService } from '../services/payment-method.service';
 import { ProductService } from '../services/product.service';
@@ -10,8 +9,9 @@ import {CurrencyPipe} from '@angular/common';
 import { LoadComponent } from '../common/load/load.component';
 import { SnackBarComponent } from '../common/snack-bar/snack-bar.component';
 import { Store } from '../model/store';
-import { PaymentMethod } from '../model/payment-method';
 import { Product } from '../model/product';
+import { Category } from '../model/category';
+import { CategoryService } from '../services/category.service';
 
 
 @Component({
@@ -29,6 +29,7 @@ export class NewPurchaseComponent implements OnInit{
     private paymentMethodService: PaymentMethodService,
     private productService: ProductService,
     private purchaseService: PurchaseService,
+    private categoryService: CategoryService,
     private loadComponent: LoadComponent,
     private snackBarComponent: SnackBarComponent) {
     this.initObjects()
@@ -42,7 +43,7 @@ export class NewPurchaseComponent implements OnInit{
 
   private initPurchase(){
     this.purchase = {
-      store:{id: 0, name: ""}, item:[], paymentMethod:{id: 0, method: "",}, total:0
+      store:{id: 0, name: ""}, item:[], paymentMethod:{id: 0, method: "",}, category:{id: null, name: ""}, total:0
     }
   }
 
@@ -75,6 +76,16 @@ export class NewPurchaseComponent implements OnInit{
       }
     });
   } 
+
+  public onChangeCategory(newValue: any) {
+    this.categoryService.getCategoryByName(newValue).subscribe((response: Category) => {
+      if(response != null) {
+        this.purchase.category = response
+      }else{
+        this.purchase.category.name = newValue
+      }
+    });
+  }
 
   public newItem() {
     const data = this.dataSource.data
