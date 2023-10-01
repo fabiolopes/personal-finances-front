@@ -33,6 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { PurchaseListComponent } from './purchase-list/purchase-list.component'
 import { PurchaseListService } from './services/purchase-list.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "right",
@@ -79,7 +80,8 @@ registerLocaleData(ptBr);
     MatToolbarModule,
     RouterModule,
     MatTooltipModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatAutocompleteModule
   ],
   providers: [
     StoreService,

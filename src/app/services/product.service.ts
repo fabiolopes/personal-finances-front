@@ -14,4 +14,8 @@ export class ProductService {
   getProductByName(product: string): Observable<Product>{
     return this.httpClient.get<Product>(this.apiConst.ENDPOINT_PRODUCT_BY_NAME+product)
   }
+
+  getProductByNameStartsWith(product: string): Observable<Product[]>{
+    return this.httpClient.get<Product[]>(this.apiConst.ENDPOINT_PRODUCT_BY_NAME_STARTS_WITH+product)
+  }
 }

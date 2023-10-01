@@ -14,4 +14,8 @@ export class CategoryService {
   getCategoryByName(category: string): Observable<Category>{
     return this.httpClient.get<Category>(this.apiConst.ENDPOINT_CATEGORY_BY_NAME+category)
   }
+
+  getCategoryByNameStartsWith(category: string): Observable<Category[]>{
+    return this.httpClient.get<Category[]>(this.apiConst.ENDPOINT_CATEGORY_BY_NAME_STARTS_WITH+category)
+  }
 }

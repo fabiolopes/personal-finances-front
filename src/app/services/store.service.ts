@@ -14,4 +14,9 @@ export class StoreService {
   getStoreByName(store: string): Observable<Store>{
     return this.httpClient.get<Store>(this.apiConst.FIND_STORE_BY_NAME+store)
   }
+
+  getStoreByNameStartsWith(store: string): Observable<Store[]>{
+    return this.httpClient.get<Store[]>(this.apiConst.FIND_STORE_BY_NAME_STARTS_WITH+store)
+  }
+
 }

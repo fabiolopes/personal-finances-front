@@ -4,21 +4,41 @@
         <div class="flex-row">
             <mat-form-field>
                 <mat-label>Categoria</mat-label>
-                <input matInput type="text" [(ngModel)]="item.category" (ngModelChange)="onChangeCategory($event)" />
+                <input matInput type="text" [(ngModel)]="autocompletePurchase.selectedCategory.name" (ngModelChange)="onChangeCategory($event)" [matAutocomplete]="autoCategory" />
+                <mat-autocomplete #autoCategory="matAutocomplete">
+                    <mat-option *ngFor="let option of autocompletePurchase.categoryOtions" [value]="option.name" >
+                      {{option.name}}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Loja</mat-label>
-                <input matInput type="text" [(ngModel)]="purchase.store.name" (ngModelChange)="onChangeStore($event)" />
+                <input matInput type="text" [(ngModel)]="autocompletePurchase.selectedStore.name" (ngModelChange)="onChangeStore($event)" [matAutocomplete]="autoStore" />
+                <mat-autocomplete #autoStore="matAutocomplete">
+                    <mat-option *ngFor="let option of autocompletePurchase.storeOtions" [value]="option.name" >
+                      {{option.name}}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
         </div>
         <div class="flex-row">
             <mat-form-field>
                 <mat-label>Método de Pagamento</mat-label>
-                <input matInput type="text" [(ngModel)]="purchase.paymentMethod.method" (ngModelChange)="onChangePaymentMethod($event)"/>
+                <input matInput type="text" [(ngModel)]="autocompletePurchase.selectedPaymentMethod.method" (ngModelChange)="onChangePaymentMethod($event)" [matAutocomplete]="autoPaymentMethod" />
+                <mat-autocomplete #autoPaymentMethod="matAutocomplete">
+                    <mat-option *ngFor="let option of autocompletePurchase.paymentMethodOtions" [value]="option.method" >
+                      {{option.method}}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Nome do Produto</mat-label>
-                <input matInput type="text" [(ngModel)]="item.product.name" (ngModelChange)="onChangeProduct($event)" />
+                <input matInput type="text" [(ngModel)]="autocompletePurchase.selectedProduct.name" (ngModelChange)="onChangeProduct($event)" [matAutocomplete]="autoProduct" />
+                <mat-autocomplete #autoProduct="matAutocomplete">
+                    <mat-option *ngFor="let option of autocompletePurchase.productOtions" [value]="option.name" >
+                      {{option.name}}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
         </div>
         <div class="flex-row">
