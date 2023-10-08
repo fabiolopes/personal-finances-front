@@ -41,6 +41,7 @@ export class NewPurchaseComponent implements OnInit{
   private initObjects(){
     this.initPurchase()
     this.initItem()
+    this.autocompletePurchase = this.getNewAutocompletePurchase()
   }
 
   getNewAutocompletePurchase(): AutocompletePurchase {
@@ -75,7 +76,8 @@ export class NewPurchaseComponent implements OnInit{
         }
       });
     } else {
-      this.purchase.product = selectedProduct[0]
+      //this.purchase.product = selectedProduct[0]
+      this.item.product = selectedProduct[0]
     }
   } 
 
@@ -107,7 +109,7 @@ export class NewPurchaseComponent implements OnInit{
         }
       });
     } else {
-      this.purchase.store = selectedStore[0]
+      this.autocompletePurchase.selectedStore = selectedStore[0]
     }
   } 
 
@@ -123,7 +125,7 @@ export class NewPurchaseComponent implements OnInit{
         }
       });
     }else{
-      this.purchase.category = selectedCategory[0]
+      this.autocompletePurchase.selectedCategory = selectedCategory[0]
     }
   }
 
@@ -138,6 +140,9 @@ export class NewPurchaseComponent implements OnInit{
   public newPurchase() {
     this.loadComponent.openDialog()
     this.purchase['items'] = this.dataSource.data
+    this.purchase.category = this.autocompletePurchase.selectedCategory
+    this.purchase.paymentMethod = this.autocompletePurchase.selectedPaymentMethod
+    this.purchase.store = this.autocompletePurchase.selectedStore
     this.purchaseService.newPurchase(this.purchase).subscribe(success => {
       console.log(success)
       this.loadComponent.closeDialog()
@@ -148,7 +153,9 @@ export class NewPurchaseComponent implements OnInit{
   }
 
   public isItemIncomplete(): boolean{
-    return this.purchase['store']['name'] == '' || this.purchase['paymentMethod']['method'] == '' ||
+    return this.autocompletePurchase.selectedStore['name'] == '' 
+    || this.autocompletePurchase.selectedPaymentMethod['method'] == ''
+    || this.autocompletePurchase.selectedStore.name == '' ||
     this.item['price'] == '' || this.item['qtd'] == 0 || this.item['valuePaid'] == '' ||
     this.item['product']['name'] == '' || this.item['product']['unit'] == ''
   }
