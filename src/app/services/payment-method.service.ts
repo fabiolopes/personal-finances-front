@@ -11,11 +11,11 @@ export class PaymentMethodService {
 
   constructor(private httpClient: HttpClient, private apiConst: ApiConstants) { }
 
-    getPaymentMethodByMethodName(method: string){
-      return this.httpClient.get<PaymentMethod>(this.apiConst.ENDPOINT_PAYMENT_METHOD_BY_NAME+method)
+    getPaymentMethodByName(name: string){
+      return this.httpClient.get<PaymentMethod>(this.apiConst.ENDPOINT_PAYMENT_METHOD_BY_NAME+name)
     }
 
-    getPaymentMethodByMethodNameStartsWith(method: string): Observable<PaymentMethod[]>{
-      return this.httpClient.get<PaymentMethod[]>(this.apiConst.ENDPOINT_PAYMENT_METHOD_BY_NAME_STARTS_WITH+method)
+    getPaymentMethodByNameStartsWith(name: string): Observable<PaymentMethod[]>{
+      return this.httpClient.get<PaymentMethod[]>(this.apiConst.ENDPOINT_PAYMENT_METHOD_BY_NAME_STARTS_WITH+name)
     }
 }

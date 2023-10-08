@@ -47,13 +47,13 @@ export class NewPurchaseComponent implements OnInit{
   getNewAutocompletePurchase(): AutocompletePurchase {
     return {categoryOtions: [], storeOtions: [], paymentMethodOtions: [],
       productOtions: [], selectedCategory: {id: 0, name: ""}, selectedStore: {id: 0, name: ""},
-      selectedPaymentMethod: {id: 0, method: "",}, selectedProduct: {id:0, name:"", description:"", unit:""}
+      selectedPaymentMethod: {id: 0, name: "",}, selectedProduct: {id:0, name:"", description:"", unit:""}
     }
   }
 
   private initPurchase(){
     this.purchase = {
-      store:{id: 0, name: ""}, item:[], paymentMethod:{id: 0, method: "",}, category:{id: null, name: ""}, total:0
+      store:{id: 0, name: ""}, item:[], paymentMethod:{id: 0, name: "",}, category:{id: null, name: ""}, total:0
     }
     this.autocompletePurchase.selectedCategory = {id: 0, name: ""}
   }
@@ -65,69 +65,90 @@ export class NewPurchaseComponent implements OnInit{
   }
 
   public onChangeProduct(newValue: any) {
-    const selectedProduct = this.autocompletePurchase.productOtions.filter((product) => product.name === newValue)
-    if(selectedProduct.length == 0){
-      this.productService.getProductByNameStartsWith(newValue).subscribe((response: Product[]) => {
-        if(response != null) {
-          this.autocompletePurchase.productOtions = response
-        }else {
-          this.autocompletePurchase.productOtions = []
-          this.purchase.product.name = newValue
-        }
-      });
-    } else {
-      //this.purchase.product = selectedProduct[0]
-      this.item.product = selectedProduct[0]
+    if(newValue == ''){
+      this.autocompletePurchase.productOtions = []
+      this.purchase.product.name = newValue
+    }else{
+      const selectedProduct = this.autocompletePurchase.productOtions.filter((product) => product.name === newValue)
+      if(selectedProduct.length == 0){
+        this.productService.getProductByNameStartsWith(newValue).subscribe((response: Product[]) => {
+          if(response != null) {
+            this.autocompletePurchase.productOtions = response
+          }else {
+            this.autocompletePurchase.productOtions = []
+            this.item.product.name = newValue
+          }
+        });
+      } else {
+        //this.purchase.product = selectedProduct[0]
+        this.item.product = selectedProduct[0]
+      }
     }
   } 
 
   public onChangePaymentMethod(newValue: any) {
-    const selectedPaymentMethod = this.autocompletePurchase.paymentMethodOtions.filter((payment) => payment.method === newValue)
-    if(selectedPaymentMethod.length == 0){
-      this.paymentMethodService.getPaymentMethodByMethodNameStartsWith(newValue).subscribe((response: PaymentMethod[]) => {
-        if(response != null) {
-          this.autocompletePurchase.paymentMethodOtions = response
-        }else {
-          this.autocompletePurchase.paymentMethodOtions = []
-          this.purchase.paymentMethod.method = newValue
-        }
-      });
-    } else {
-      this.purchase.paymentMethod = selectedPaymentMethod[0]
+    if(newValue == ''){
+      this.autocompletePurchase.paymentMethodOtions = []
+      this.purchase.paymentMethod.name = newValue
+    }else{
+      const selectedPaymentMethod = this.autocompletePurchase.paymentMethodOtions.filter((payment) => payment.name === newValue)
+      if(selectedPaymentMethod.length == 0){
+        this.paymentMethodService.getPaymentMethodByNameStartsWith(newValue).subscribe((response: PaymentMethod[]) => {
+          if(response != null) {
+            this.autocompletePurchase.paymentMethodOtions = response
+          }else {
+            this.autocompletePurchase.paymentMethodOtions = []
+            this.purchase.paymentMethod.name = newValue
+          }
+        });
+      } else {
+        this.purchase.paymentMethod = selectedPaymentMethod[0]
+      }
     }
   } 
 
   public onChangeStore(newValue: any) {
-    const selectedStore = this.autocompletePurchase.storeOtions.filter((store) => store.name === newValue)
-    if(selectedStore.length == 0){
-      this.storeService.getStoreByNameStartsWith(newValue).subscribe((response: Store[]) => {
-        if(response != null) {
-          this.autocompletePurchase.storeOtions = response
-        }else {
-          this.autocompletePurchase.storeOtions = []
-          this.purchase.store.name = newValue
-        }
-      });
-    } else {
-      this.autocompletePurchase.selectedStore = selectedStore[0]
+    if(newValue == ''){
+      this.autocompletePurchase.storeOtions = []
+      this.purchase.store.name = newValue
+    }else{
+      const selectedStore = this.autocompletePurchase.storeOtions.filter((store) => store.name === newValue)
+      if(selectedStore.length == 0){
+        this.storeService.getStoreByNameStartsWith(newValue).subscribe((response: Store[]) => {
+          if(response != null) {
+            this.autocompletePurchase.storeOtions = response
+          }else {
+            this.autocompletePurchase.storeOtions = []
+            this.purchase.store.name = newValue
+          }
+        });
+      } else {
+        this.autocompletePurchase.selectedStore = selectedStore[0]
+      }
     }
   } 
 
   public onChangeCategory(newValue: any) {
-    const selectedCategory = this.autocompletePurchase.categoryOtions.filter((cat) => cat.name === newValue)
-    if(selectedCategory.length == 0){
-      this.categoryService.getCategoryByNameStartsWith(newValue).subscribe((response: Category[]) => {
-        if(response != null) {
-          this.autocompletePurchase.categoryOtions = response
-        }else{
-          this.autocompletePurchase.categoryOtions = []
-          this.purchase.category.name = newValue
-        }
-      });
+    if(newValue == ''){
+      this.autocompletePurchase.categoryOtions = []
+      this.purchase.category.name = newValue
     }else{
-      this.autocompletePurchase.selectedCategory = selectedCategory[0]
+      const selectedCategory = this.autocompletePurchase.categoryOtions.filter((cat) => cat.name === newValue)
+      if(selectedCategory.length == 0){
+        this.categoryService.getCategoryByNameStartsWith(newValue).subscribe((response: Category[]) => {
+          if(response != null) {
+            this.autocompletePurchase.categoryOtions = response
+          }else{
+            this.autocompletePurchase.categoryOtions = []
+            this.purchase.category.name = newValue
+          }
+        });
+      }else{
+        this.autocompletePurchase.selectedCategory = selectedCategory[0]
+      }
     }
   }
+  
 
   public newItem() {
     const data = this.dataSource.data
@@ -154,7 +175,7 @@ export class NewPurchaseComponent implements OnInit{
 
   public isItemIncomplete(): boolean{
     return this.autocompletePurchase.selectedStore['name'] == '' 
-    || this.autocompletePurchase.selectedPaymentMethod['method'] == ''
+    || this.autocompletePurchase.selectedPaymentMethod['name'] == ''
     || this.autocompletePurchase.selectedStore.name == '' ||
     this.item['price'] == '' || this.item['qtd'] == 0 || this.item['valuePaid'] == '' ||
     this.item['product']['name'] == '' || this.item['product']['unit'] == ''

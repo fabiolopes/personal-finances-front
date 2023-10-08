@@ -2,44 +2,32 @@
 <div class="flex-container">
     <div class="form-container">
         <div class="flex-row">
-            <mat-form-field>
-                <mat-label>Categoria</mat-label>
-                <input matInput type="text" [(ngModel)]="autocompletePurchase.selectedCategory.name" (ngModelChange)="onChangeCategory($event)" [matAutocomplete]="autoCategory" />
-                <mat-autocomplete #autoCategory="matAutocomplete">
-                    <mat-option *ngFor="let option of autocompletePurchase.categoryOtions" [value]="option.name" >
-                      {{option.name}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Loja</mat-label>
-                <input matInput type="text" [(ngModel)]="autocompletePurchase.selectedStore.name" (ngModelChange)="onChangeStore($event)" [matAutocomplete]="autoStore" />
-                <mat-autocomplete #autoStore="matAutocomplete">
-                    <mat-option *ngFor="let option of autocompletePurchase.storeOtions" [value]="option.name" >
-                      {{option.name}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
+            <app-autocomplete
+                [label]="'Categoria'"
+                [(selectedItem)]="autocompletePurchase.selectedCategory.name"
+                [options]="autocompletePurchase.categoryOtions"
+                (selectedItemChange)="onChangeCategory($event)">
+            </app-autocomplete>
+            <app-autocomplete
+                [label]="'Loja'"
+                [(selectedItem)]="autocompletePurchase.selectedStore.name"
+                [options]="autocompletePurchase.storeOtions"
+                (selectedItemChange)="onChangeStore($event)">
+            </app-autocomplete>
         </div>
         <div class="flex-row">
-            <mat-form-field>
-                <mat-label>Método de Pagamento</mat-label>
-                <input matInput type="text" [(ngModel)]="autocompletePurchase.selectedPaymentMethod.method" (ngModelChange)="onChangePaymentMethod($event)" [matAutocomplete]="autoPaymentMethod" />
-                <mat-autocomplete #autoPaymentMethod="matAutocomplete">
-                    <mat-option *ngFor="let option of autocompletePurchase.paymentMethodOtions" [value]="option.method" >
-                      {{option.method}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Nome do Produto</mat-label>
-                <input matInput type="text" [(ngModel)]="autocompletePurchase.selectedProduct.name" (ngModelChange)="onChangeProduct($event)" [matAutocomplete]="autoProduct" />
-                <mat-autocomplete #autoProduct="matAutocomplete">
-                    <mat-option *ngFor="let option of autocompletePurchase.productOtions" [value]="option.name" >
-                      {{option.name}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
+            <app-autocomplete
+                [label]="'Método de Pagamento'"
+                [(selectedItem)]="autocompletePurchase.selectedPaymentMethod.name"
+                [options]="autocompletePurchase.paymentMethodOtions"
+                (selectedItemChange)="onChangePaymentMethod($event)">
+            </app-autocomplete>
+            <app-autocomplete
+                [label]="'Nome do Produto'"
+                [(selectedItem)]="autocompletePurchase.selectedProduct.name"
+                [options]="autocompletePurchase.productOtions"
+                (selectedItemChange)="onChangeProduct($event)">
+            </app-autocomplete>
         </div>
         <div class="flex-row">
             <mat-form-field>
@@ -68,7 +56,7 @@
             </div>
         </div>
         <span *ngIf="purchase.store.name != ''">Loja: {{purchase.store.name}}</span>
-        <span *ngIf="purchase.paymentMethod.method != ''">Método de pagamento: {{purchase.paymentMethod.method}}</span>
+        <span *ngIf="purchase.paymentMethod.name != ''">Método de pagamento: {{purchase.paymentMethod.name}}</span>
         <span *ngIf="purchase.total != 0">Total: {{purchase.total | currency}}</span>
     </div>
     <div class="table-container">

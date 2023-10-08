@@ -34,6 +34,7 @@ import { PurchaseListComponent } from './purchase-list/purchase-list.component'
 import { PurchaseListService } from './services/purchase-list.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AutocompleteComponent } from './common/autocomplete/autocomplete.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "right",
@@ -55,7 +56,8 @@ registerLocaleData(ptBr);
     HomeComponent,
     LoadComponent,
     SnackBarComponent,
-    PurchaseListComponent
+    PurchaseListComponent,
+    AutocompleteComponent
   ],
   imports: [
     BrowserModule,
